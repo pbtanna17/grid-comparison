@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "materialgrid"
+  "defaultProject": "materialgrid",
+  "cli": {
+    "analytics": "b08e88d5-7ed8-4612-bb7c-b139306599fe"
+  }
 }

@@ -47,6 +47,7 @@ export class GridsterComponent implements OnInit {
         y: 0,
       };
       x += tile.cols;
+      dashboardItem.dragEnabled = true;
       return dashboardItem;
     });
   }
