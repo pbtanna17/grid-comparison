@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GridsterConfig, GridsterItem }  from 'angular-gridster2';
+import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { Tile } from '../tile';
 
 @Component({
@@ -7,7 +7,6 @@ import { Tile } from '../tile';
   templateUrl: './gridster.component.html',
   styleUrls: ['./gridster.component.scss']
 })
-
 
 export class GridsterComponent implements OnInit {
   @Input() boxsize: number;
@@ -35,11 +34,13 @@ export class GridsterComponent implements OnInit {
       fixedRowHeight: this.boxsize,
       mobileBreakpoint: 500,
       margin: this.gutter,
+      pushItems: true,
+      swapWhileDragging: true,
       outerMargin: false,
     };
     let x = 0;
     this.dashboard = this.tiles.map((tile) => {
-      let dashboardItem: GridsterItem = {
+      const dashboardItem: GridsterItem = {
         cols: tile.cols,
         rows: tile.rows,
         name: tile.name,
