@@ -15,6 +15,7 @@ export class AppComponent {
   colsize: number;
   rowsize: number;
   tiles;
+  optionsChange: Subject<any> = new Subject<any>();
 
   constructor() {
     this.tiles = tiles;
@@ -22,6 +23,7 @@ export class AppComponent {
 
   setWidth(width: number) {
     this.width = width;
+    this.optionsChange.next({width, tiles: null, gutter: this.gutter});
   }
 
   addWidget() {
@@ -30,5 +32,11 @@ export class AppComponent {
       cols: this.colsize,
       name: `Name ${this.rowsize} X ${this.colsize}`
     }];
+
+    this.optionsChange.next({width: this.width, tiles: this.tiles});
+  }
+
+  getOptionsChangeSubject(): Subject<any> {
+    return this.optionsChange;
   }
 }

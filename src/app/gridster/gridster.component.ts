@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { GridsterConfig, GridsterItem }  from 'angular-gridster2';
+import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { Tile } from '../tile';
+import { AppComponent } from '../app.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-gridster',
@@ -8,15 +10,15 @@ import { Tile } from '../tile';
   styleUrls: ['./gridster.component.scss']
 })
 
-
-export class GridsterComponent implements OnInit {
+export class GridsterComponent implements OnInit, OnDestroy {
   @Input() boxsize: number;
   @Input() gutter: number;
   @Input('tiles') tiles: Tile[];
   options: GridsterConfig;
   dashboard: GridsterItem[];
+  optionSubscription: Subject<any>;
 
-  constructor() { }
+  constructor(private app: AppComponent) { }
 
   static itemChange(item, itemComponent) {
     console.info('itemChanged', item, itemComponent);
@@ -27,6 +29,14 @@ export class GridsterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.optionSubscription = this.app.getOptionsChangeSubject()
+      .subscribe((option) => {
+        if (option.gutter) {
+          this.options.margin = option.gutter;
+          this.options.api.optionsChanged();
+        }
+      }
+    );
     this.options = {
       itemChangeCallback: GridsterComponent.itemChange,
       itemResizeCallback: GridsterComponent.itemResize,
@@ -35,11 +45,13 @@ export class GridsterComponent implements OnInit {
       fixedRowHeight: this.boxsize,
       mobileBreakpoint: 500,
       margin: this.gutter,
+      pushItems: true,
+      swapWhileDragging: true,
       outerMargin: false,
     };
     let x = 0;
     this.dashboard = this.tiles.map((tile) => {
-      let dashboardItem: GridsterItem = {
+      const dashboardItem: GridsterItem = {
         cols: tile.cols,
         rows: tile.rows,
         name: tile.name,
@@ -47,8 +59,13 @@ export class GridsterComponent implements OnInit {
         y: 0,
       };
       x += tile.cols;
+      dashboardItem.dragEnabled = true;
       return dashboardItem;
     });
+  }
+
+  ngOnDestroy() {
+    this.optionSubscription.unsubscribe();
   }
 
 }
