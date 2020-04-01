@@ -1,0 +1,16 @@
+<mat-grid-list
+    cols="{{columns}}"
+    gutterSize="{{gutter}}px"
+    rowHeight="1:1"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)">
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="tile.cols < columns ? tile.cols : columns"
+        [rowspan]="tile.rows"
+        cdkDrag>
+        <app-each-widget
+        [name]="tile.name"
+        ></app-each-widget>
+    </mat-grid-tile>
+  </mat-grid-list>

@@ -1,0 +1,31 @@
+.border {
+    margin: 10px auto;
+}
+label {
+    margin-left: 50px;
+}
+@media (max-width: 599.99px) {
+    .border {
+        width: 375px;
+    }
+}
+@media (min-width: 600px) and (max-width: 959.99px) {
+    .border {
+        width: 600px;
+    }
+}
+@media (min-width: 960px) and (max-width: 1279.99px) {
+    .border {
+        width: 960px;
+    }
+}
+@media (min-width: 1280px) and (max-width: 1919.99px) {
+    .border {
+        width: 1280px;
+    }
+}
+@media (min-width: 1920px) {
+    .border {
+        width: 1920px;
+    }
+}

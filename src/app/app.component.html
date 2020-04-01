@@ -1,0 +1,35 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="border" [style.width.px]="width">
+  <label for="box-size">Box Size:</label>
+  <input id="box-size" type="number" min="50" max="150" step="5" [(ngModel)]="boxsize"/>
+  <label for="gutter-size">Gutter:</label>
+  <input id="gutter-size" type="number" min="1" max="20" step="1" [(ngModel)]="gutter"/>
+  <label>Add Widget</label>
+  <label for="row-size">Row Size:</label>
+  <input id="row-size" type="number" min="1" max="5" step="1" [(ngModel)]="rowsize" />
+  <label for="col-size">Column Size:</label>
+  <input id="col-size" type="number" min="1" max="5" step="1" [(ngModel)]="colsize" />
+  <button (click)="addWidget()">Add</button>
+  <app-grid-list-dynamic-example
+  (newWidth)="setWidth($event)"
+  [boxsize]="boxsize"
+  [gutter]="gutter"
+  [tiles]="tiles"></app-grid-list-dynamic-example>
+  <hr/>
+  <app-muuri-example
+  [boxsize]="boxsize"
+  [gutter]="gutter"
+  [tiles]="tiles"></app-muuri-example>
+  <hr/>
+  <app-gridster
+  [boxsize]="boxsize"
+  [gutter]="gutter"
+  [tiles]="tiles"></app-gridster>
+</div>

@@ -1,0 +1,10 @@
+<div class="grid">
+    <div class="item" *ngFor="let tile of tiles">
+        <div
+        [style.width.px]="(boxsize+gutter)*tile.cols-gutter"
+    [style.height.px]="(boxsize+gutter)*tile.rows-gutter"
+    [style.margin.px]="gutter/2">
+            <app-each-widget [name]="tile.name"></app-each-widget>
+        </div>
+    </div>
+  </div> 
