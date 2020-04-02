@@ -1,5 +1,12 @@
 gridster {
-  height: 300px;
+  background-color: #ffffff;
+  &.fixed {
+    overflow: initial;
+  }
+  .gridster-column {
+    border-left-color: #000000;
+    border-right-color: #000000;
+  }
 }
 
 gridster-item {

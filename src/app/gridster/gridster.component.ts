@@ -2,7 +2,7 @@ import {Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { GridsterConfig, GridsterItem } from 'angular-gridster2';
 import { Tile } from '../tile';
 import { AppComponent } from '../app.component';
-import { Subject } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gridster',
@@ -16,7 +16,7 @@ export class GridsterComponent implements OnInit, OnDestroy {
   @Input('tiles') tiles: Tile[];
   options: GridsterConfig;
   dashboard: GridsterItem[];
-  optionSubscription: Subject<any>;
+  optionSubscription: Subscription;
 
   constructor(private app: AppComponent) { }
 
@@ -46,8 +46,11 @@ export class GridsterComponent implements OnInit, OnDestroy {
       mobileBreakpoint: 500,
       margin: this.gutter,
       pushItems: true,
+      disablePushOnDrag: true,
+      swap: true,
       swapWhileDragging: true,
       outerMargin: false,
+      minCols: 1,
     };
     let x = 0;
     this.dashboard = this.tiles.map((tile) => {
