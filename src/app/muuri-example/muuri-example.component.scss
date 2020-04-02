@@ -4,10 +4,8 @@
   .item {
     position: absolute;
     color: #fff;
+    background: #000;
     z-index: 1;
-    div {
-        background: #000;
-    }
   }
   .item.muuri-item-dragging {
     z-index: 3;

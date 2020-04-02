@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { tiles, Tile } from './tile';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,9 @@ export class AppComponent {
   boxsize = 100;
   gutter = 10;
   width: number;
-  colsize: number;
-  rowsize: number;
-  tiles;
+  colsize: number = 1;
+  rowsize: number = 1;
+  tiles: Tile[];
   optionsChange: Subject<any> = new Subject<any>();
 
   constructor() {
@@ -30,7 +30,8 @@ export class AppComponent {
     this.tiles = [...this.tiles, {
       rows: this.rowsize,
       cols: this.colsize,
-      name: `Name ${this.rowsize} X ${this.colsize}`
+      name: `Name ${this.rowsize} X ${this.colsize}`,
+      id: this.tiles.length + 1,
     }];
 
     this.optionsChange.next({width: this.width, tiles: this.tiles});
@@ -38,5 +39,10 @@ export class AppComponent {
 
   getOptionsChangeSubject(): Subject<any> {
     return this.optionsChange;
+  }
+
+  tilesChange(tiles: Tile[]) {
+    this.tiles = [...tiles];
+    this.optionsChange.next({width: this.width, tiles: this.tiles});
   }
 }

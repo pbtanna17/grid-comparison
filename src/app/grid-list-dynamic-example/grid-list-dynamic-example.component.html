@@ -3,12 +3,14 @@
     gutterSize="{{gutter}}px"
     rowHeight="1:1"
     cdkDropList
+    [cdkDropListData]="tiles"
     (cdkDropListDropped)="drop($event)">
     <mat-grid-tile
         *ngFor="let tile of tiles"
         [colspan]="tile.cols < columns ? tile.cols : columns"
         [rowspan]="tile.rows"
-        cdkDrag>
+        cdkDrag
+        cdkDragBoundary=".border">
         <app-each-widget
         [name]="tile.name"
         ></app-each-widget>

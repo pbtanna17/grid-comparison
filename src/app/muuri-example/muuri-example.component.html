@@ -1,10 +1,9 @@
 <div class="grid">
-    <div class="item" *ngFor="let tile of tiles">
-        <div
-        [style.width.px]="(boxsize+gutter)*tile.cols-gutter"
+    <div class="item" [attr.data-tile-id]="tile.id" *ngFor="let tile of tiles"
+    [style.width.px]="(boxsize+gutter)*tile.cols-gutter>width-10?width-10:(boxsize+gutter)*tile.cols-gutter"
     [style.height.px]="(boxsize+gutter)*tile.rows-gutter"
-    [style.margin.px]="gutter/2">
-            <app-each-widget [name]="tile.name"></app-each-widget>
-        </div>
+    [style.margin.px]="gutter/2"
+    >
+        <app-each-widget [name]="tile.name"></app-each-widget>
     </div>
   </div> 

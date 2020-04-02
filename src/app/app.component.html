@@ -28,7 +28,9 @@
   <app-muuri-example
   [boxsize]="boxsize"
   [gutter]="gutter"
-  [tiles]="tiles"></app-muuri-example>
+  [tiles]="tiles"
+  (tilesChange)="tilesChange($event)"
+  ></app-muuri-example>
   <hr/>
   <app-gridster
   [boxsize]="boxsize"

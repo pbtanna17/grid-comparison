@@ -21,11 +21,11 @@ export class GridsterComponent implements OnInit, OnDestroy {
   constructor(private app: AppComponent) { }
 
   static itemChange(item, itemComponent) {
-    console.info('itemChanged', item, itemComponent);
+    console.info('Gridster itemChanged', item, itemComponent);
   }
 
   static itemResize(item, itemComponent) {
-    console.info('itemResized', item, itemComponent);
+    console.info('Gridster itemResized', item, itemComponent);
   }
 
   ngOnInit(): void {
@@ -33,6 +33,12 @@ export class GridsterComponent implements OnInit, OnDestroy {
       .subscribe((option) => {
         if (option.gutter) {
           this.options.margin = option.gutter;
+        }
+
+        if (option.tiles) {
+          this.mapTilesToDashboard(option.tiles);
+        }
+        if (this.options.api && this.options.api.optionsChanged) {
           this.options.api.optionsChanged();
         }
       }
@@ -46,14 +52,24 @@ export class GridsterComponent implements OnInit, OnDestroy {
       mobileBreakpoint: 500,
       margin: this.gutter,
       pushItems: true,
-      disablePushOnDrag: true,
+      // disablePushOnDrag: true,
       swap: true,
       swapWhileDragging: true,
       outerMargin: false,
       minCols: 1,
     };
+    if (this.tiles) {
+      this.mapTilesToDashboard(this.tiles);
+    }
+  }
+
+  ngOnDestroy() {
+    this.optionSubscription.unsubscribe();
+  }
+
+  mapTilesToDashboard(tiles) {
     let x = 0;
-    this.dashboard = this.tiles.map((tile) => {
+    this.dashboard = tiles.map((tile) => {
       const dashboardItem: GridsterItem = {
         cols: tile.cols,
         rows: tile.rows,
@@ -66,9 +82,4 @@ export class GridsterComponent implements OnInit, OnDestroy {
       return dashboardItem;
     });
   }
-
-  ngOnDestroy() {
-    this.optionSubscription.unsubscribe();
-  }
-
 }
